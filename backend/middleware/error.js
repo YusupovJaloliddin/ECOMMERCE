@@ -2,7 +2,7 @@ const ErrorHandler = require("../utils/errorhendler");
 
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.message = err.message || "Internal Server Error!";
+  err.message = err.message || "Internal Server Error...";
 
   //Wrong MongoDB id error
   if (err.name === "CastError") {
@@ -11,7 +11,7 @@ module.exports = (err, req, res, next) => {
   }
   //Mongoose  duplicate key error
   if (err.code === 11000) {
-    const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
+    const message = `Duplicate ${Object.keys(err.keyValue)} entered..`;
     err = new ErrorHandler(message, 400);
   }
   //Wrong JWT error
@@ -21,7 +21,7 @@ module.exports = (err, req, res, next) => {
   }
   // JWT EXpire error
   if (err.name === "TokenExpiredError") {
-    const message = `Json web token is Expire ,try again!`;
+    const message = `Json web token is Expire ,try again!!!!`;
     err = new ErrorHandler(message, 400);
   }
   res.status(err.statusCode).json({
